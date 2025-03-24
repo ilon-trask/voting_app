@@ -1,7 +1,6 @@
 "use client";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -13,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { socket } from "@/lib/socket";
-import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -35,10 +33,11 @@ function TimerModal({ votingId, setStatus }: Props) {
   const onSubmit = ({ timer }: { timer: number }) => {
     socket.emit("counter", { roomId: votingId, timer });
     setStatus("end");
+    setIsOpen(false);
   };
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
         <Button>Start voting</Button>
       </AlertDialogTrigger>
@@ -75,7 +74,7 @@ function TimerModal({ votingId, setStatus }: Props) {
           </AlertDialogHeader>
           <AlertDialogFooter className="mt-4">
             <AlertDialogCancel>Назад</AlertDialogCancel>
-            <AlertDialogAction type="submit">Зберегти</AlertDialogAction>
+            <Button type="submit">Зберегти</Button>
           </AlertDialogFooter>
         </form>
       </AlertDialogContent>
