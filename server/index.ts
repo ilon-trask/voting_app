@@ -8,8 +8,8 @@ import {
   getDataLabel,
   giveDataLabel,
   joinRoomLabel,
-} from "../consts";
-import { SendCreateRoom, type SendVoteType } from "../types";
+} from "../consts.ts";
+import { SendCreateRoom, type SendVoteType } from "../types.ts";
 import express from "express";
 import cors from "cors";
 
