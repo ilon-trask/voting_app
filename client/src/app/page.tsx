@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createRoomLabel } from "../../../consts";
 import { SendCreateRoom } from "../../../types";
+import JoinVotingModal from "@/components/JoinVotingDialog";
 
 async function handleSubmit() {
   "use server";
@@ -36,11 +37,14 @@ export default function Home() {
       <h1 className="text-3xl sm:text-4xl font-bold mb-8 text-center">
         Welcome to the Voting App
       </h1>
-      <form action={handleSubmit} className="w-full max-w-xs sm:max-w-sm">
-        <Button type="submit" className="w-full py-2">
-          Create Voting
-        </Button>
-      </form>
+      <div className="grid grid-cols-2 gap-2">
+        <form action={handleSubmit} className="w-full max-w-xs sm:max-w-sm">
+          <Button type="submit" className="w-full py-2">
+            Create Voting
+          </Button>
+        </form>
+        <JoinVotingModal />
+      </div>
     </main>
   );
 }
