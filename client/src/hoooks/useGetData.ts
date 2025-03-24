@@ -20,8 +20,8 @@ export function useGetData(
     }) {
       if (roomId === votingId) {
         if (!authorId) {
-          setError("no author");
-          throw new Error("no author");
+          setError("no such voting");
+          throw new Error("no such voting");
         }
 
         setAuthorId(authorId);
